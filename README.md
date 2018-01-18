@@ -20,4 +20,13 @@ help message:
 
     $ ./kotlin-argparser-example --help
 
-Or to display the help message:
+Or to use the application:
+
+    $ ./kotlin-argparser-example --fast --size 5 here there everywhere
+    verbose =     false
+    name =        John Doe
+    size =        5
+    includeDirs = []
+    optimizeFor = FAST
+    sources =     [here, there]
+    destination = everywhere
