@@ -30,7 +30,6 @@ import com.xenomachina.argparser.SystemExitException
 import com.xenomachina.argparser.default
 import com.xenomachina.argparser.mainBody
 import java.io.File
-import java.lang.System
 
 enum class OptimizationMode { GOOD, FAST, CHEAP }
 
@@ -66,13 +65,21 @@ class ExampleArgs(parser: ArgParser) {
 }
 
 /**
- * In the main function of our program we call mainBody, (optionally) telling it the name of our program. mainBody will
- * handle any [SystemExitException] thrown by the [ArgParser] or its delegates. This includes displaying `--help` as
- * well as error messages, and exiting the process with an appropriate status code.
+ * The main function of our program calls mainBody, which will handle any
+ * [SystemExitException] thrown by the [ArgParser] or its delegates. This
+ * includes displaying `--help` as well as error messages, and exiting the
+ * process with an appropriate status code.
  */
-fun main(args: Array<String>) = mainBody(System.getProperty("com.xenomachina.argparser.main")) {
-        ExampleArgs(ArgParser(args)).run {
-            println("""
+fun main(args: Array<String>) = mainBody {
+    // We construct an ArgParser, passing it unparsed command-line arguments,
+    // args. Its parseInto method will instantiate ExampleArgs (passing in
+    // this ArgParser), and then force parsing to occur. The resulting
+    // ExampleArgs instance contains our parsed arguments.
+    val parsedArgs = ArgParser(args).parseInto(::ExampleArgs)
+
+    // At this point our parsed arguments are ready use.
+    parsedArgs.run {
+        println("""
                 verbose =     $verbose
                 name =        $name
                 size =        $size
@@ -80,5 +87,5 @@ fun main(args: Array<String>) = mainBody(System.getProperty("com.xenomachina.arg
                 optimizeFor = $optimizeFor
                 sources =     $sources
                 destination = $destination""".trimIndent())
-        }
     }
+}
