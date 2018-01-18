@@ -41,16 +41,9 @@ apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'application'
 apply plugin: 'kotlin'
 apply plugin: 'java'
-apply plugin: 'jacoco'
 
 assert name == 'kotlin-argparser-example'
 description = 'Example of kotlin-argparser'
-
-group 'com.xenomachina'
-project.ext {
-    githubRepo = "xenomachina/$name"
-    vcsUrl = "https://github.com/$githubRepo"
-}
 
 sourceCompatibility = 1.6
 
