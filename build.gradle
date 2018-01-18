@@ -53,10 +53,6 @@ dependencies {
     compile "com.xenomachina:kotlin-argparser:$kotlin_argparser_version"
 }
 
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-}
-
 //////////////////////////////////////////////////////////////////////////////
 // application config
 //////////////////////////////////////////////////////////////////////////////
@@ -72,13 +68,6 @@ mainClassName = "com.xenomachina.argparser.example.MainKt"
 // installed, or if the user is calling it with a qualified pathname or via a
 // symlink). See also https://stackoverflow.com/q/48307027/90848
 applicationDefaultJvmArgs = ["-Dcom.xenomachina.argparser.programName=$name"]
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'MainKt'
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
 
 //////////////////////////////////////////////////////////////////////////////
 // ktlint config
