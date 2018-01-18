@@ -42,9 +42,6 @@ apply plugin: 'application'
 apply plugin: 'kotlin'
 apply plugin: 'java'
 
-assert name == 'kotlin-argparser-example'
-description = 'Example of kotlin-argparser'
-
 sourceCompatibility = 1.6
 
 repositories {
