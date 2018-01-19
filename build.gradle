@@ -29,14 +29,14 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-// to check for updates of dependencies run:
-// ./gradlew dependencyUpdates -Drevision=release
-apply plugin: 'com.github.ben-manes.versions'
+plugins {
+    id 'org.jmailen.kotlinter' version '1.6.0'
+    id 'com.github.ben-manes.versions' version '0.17.0'
+}
 
 apply plugin: 'application'
 apply plugin: 'kotlin'
@@ -68,31 +68,3 @@ mainClassName = "com.xenomachina.argparser.example.MainKt"
 // installed, or if the user is calling it with a qualified pathname or via a
 // symlink). See also https://stackoverflow.com/q/48307027/90848
 applicationDefaultJvmArgs = ["-Dcom.xenomachina.argparser.programName=$name"]
-
-//////////////////////////////////////////////////////////////////////////////
-// ktlint config
-//////////////////////////////////////////////////////////////////////////////
-
-// Based on https://github.com/shyiko/ktlint
-
-configurations {
-    ktlint
-}
-
-dependencies {
-    ktlint "com.github.shyiko:ktlint:$ktlint_version"
-}
-
-task ktlint(type: JavaExec) {
-    main = "com.github.shyiko.ktlint.Main"
-    classpath = configurations.ktlint
-    args "src/**/*.kt"
-}
-
-check.dependsOn ktlint
-
-task ktlintFormat(type: JavaExec) {
-    main = "com.github.shyiko.ktlint.Main"
-    classpath = configurations.ktlint
-    args "-F", "src/**/*.kt"
-}
