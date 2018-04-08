@@ -34,7 +34,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jmailen.kotlinter' version '1.7.0'
+    id 'org.jmailen.kotlinter' version '1.11.1'
 }
 
 apply plugin: 'application'
